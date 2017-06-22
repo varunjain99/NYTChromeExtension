@@ -1,18 +1,12 @@
-console.log("HI");
-
 function renderList(array)  {
-  console.log("HEY");
   list = document.createElement('ul');
   for (var i = 0; i < Math.min(array.length, 4); i++) {
     var item = document.createElement('li');
     var hr = document.createElement('hr')
     var link = document.createElement('a');
     link.textContent = array[i].title;
-    link.href = array[i].link;
-    console.log(array[i].link);
-    link.onclick = function () {
-                chrome.tabs.create({active: true, url: array[i].link});
-            };
+    link.href = array[i].url;
+    link.setAttribute('target', '_blank');
     item.appendChild(link);
     list.appendChild(item);
     list.appendChild(hr);
@@ -30,12 +24,11 @@ function topStories() {
     url: url,
     method: 'GET',
   }).done(function(result) {
-    console.log(result.results);
     var arr = result.results.sort( function() { return 0.5 - Math.random() } );
     var display = [];
     for (var i = 0; i < Math.min(arr.length, 4); i++) {
       display.push({"title" : arr[i].title,
-                    "link" : arr[i].url});
+                    "url" : arr[i].url});
     }
       renderList(display);
   }).fail(function(err) {
@@ -43,8 +36,4 @@ function topStories() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-        console.log("HI");
-        topStories();
-      }
-    );
+document.addEventListener('DOMContentLoaded', topStories);

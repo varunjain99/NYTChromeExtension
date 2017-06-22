@@ -1,8 +1,8 @@
 {
 	"manifest_version" : 2,
 
-	"name" : "Example",
-	"description" : "Image Search",
+	"name" : "Popular Politics",
+	"description" : "Chrome extension giving popular political stories from the New York Times",
 	"version" : "1.0",
 
 	"browser_action" : {
